@@ -77,10 +77,30 @@ Start a new Claude Code session and they'll appear in the agent list. To use one
 
 Before you rely on an agent, open it and fill in its "Project context" section if it has one. Agents with an empty context section still work, but they'll spend time finding things you could have told them.
 
+## Third-party agents
+
+I also use agents from ECC. These copies have local changes listed in [CHANGES.md](third-party/affaan-m/ECC/CHANGES.md).
+
+| Agent | Author | Source | License |
+|---|---|---|---|
+| [agent-evaluator](third-party/affaan-m/ECC/agents/agent-evaluator.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [code-explorer](third-party/affaan-m/ECC/agents/code-explorer.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [code-reviewer](third-party/affaan-m/ECC/agents/code-reviewer.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [doc-updater](third-party/affaan-m/ECC/agents/doc-updater.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [gan-evaluator](third-party/affaan-m/ECC/agents/gan-evaluator.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [gan-generator](third-party/affaan-m/ECC/agents/gan-generator.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [gan-planner](third-party/affaan-m/ECC/agents/gan-planner.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [opensource-forker](third-party/affaan-m/ECC/agents/opensource-forker.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [opensource-packager](third-party/affaan-m/ECC/agents/opensource-packager.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [opensource-sanitizer](third-party/affaan-m/ECC/agents/opensource-sanitizer.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [refactor-cleaner](third-party/affaan-m/ECC/agents/refactor-cleaner.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [security-reviewer](third-party/affaan-m/ECC/agents/security-reviewer.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+| [tdd-guide](third-party/affaan-m/ECC/agents/tdd-guide.md) | Affaan Mustafa | [ECC](https://github.com/affaan-m/ECC) | MIT |
+
 ## Skills
 
 The skills I use with these agents are in a separate repo: [claude-skills](https://github.com/UribeLandscapes/claude-skills).
 
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT for my own agents. Files under [third-party](third-party/) keep their authors' licenses.
