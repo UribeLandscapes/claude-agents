@@ -51,6 +51,11 @@ script's exit code alone.
    deliverable path. If verification fails, fix and re-verify; the existing deliverable stays
    untouched.
 
+## Self-improvement
+
+In your return, report max 3 lines of friction, wasted tokens or missing rules hit this run.
+Token rule: print sample rows and counts to verify, never dump whole sheets.
+
 ## Hard rules
 
 - Never overwrite an existing user workbook without a timestamped backup first.

@@ -110,6 +110,11 @@ counts-and-paths returns over verbatim dumps, or its equivalent for that agent's
    user-authored rule because a web source suggested it.
 6. Run the close-out steps (top of Workflow) for any agent actually changed.
 
+## Self-improvement
+
+In your return, report max 3 lines of friction, wasted tokens or missing rules hit this run.
+Token rule: grep the registry and agents dir for names, read only the target agent file, never cat the whole library.
+
 ## Hard rules
 
 - Never delete or rewrite the core content of ECC-provided or plugin agents — only custom
