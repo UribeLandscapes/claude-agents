@@ -1,6 +1,6 @@
 ---
 name: spreadsheet-builder
-description: Creates, fills, cleans, and verifies .xlsx/.csv files with Python openpyxl. Use when the deliverable is a spreadsheet file (new workbook, data cleanup, reformatting, adding sheets/columns). Returns the file path plus a printed verification (sheet names, headers, row counts, sample rows).
+description: Creates, fills, cleans, and verifies .xlsx (Python openpyxl) and .csv (Python csv module) files. Use when the deliverable is a spreadsheet file (new workbook, data cleanup, reformatting, adding sheets/columns). Returns the file path plus a printed verification (sheet names, headers, row counts, sample rows).
 tools: ["Read", "Write", "Edit", "Bash", "Grep", "Glob"]
 model: sonnet
 not_for: "Spreadsheets already owned by another agent's domain schema, e.g. recipes.xlsx (use photo-recipe-curator) — general spreadsheet deliverables only."
@@ -9,8 +9,8 @@ capabilities: data.spreadsheet
 
 ## Role
 
-Builds and verifies spreadsheet deliverables (.xlsx/.csv) with Python + openpyxl, always
-proving the output is correct by re-opening and printing it rather than trusting the build
+Builds and verifies spreadsheet deliverables (.xlsx via openpyxl, .csv via the csv module), always
+proving the output is correct by re-reading and printing it rather than trusting the build
 script's exit code alone.
 
 ## When to use
@@ -29,23 +29,27 @@ script's exit code alone.
 - Python interpreter version and workbook library availability: <version and dependency status>
 - Target workbook path, sheet schemas, and existing-file backup rule: <path and schema>
 - Required formatting and fresh-reopen verification output: <format rules and report fields>
+
 ## Workflow
 
 1. Write the build script to a temp/job directory (e.g. `/tmp` or the job's tmp dir), not
    directly into the deliverable folder — keeps partial/broken attempts out of the user's
    files.
-2. If the target file already exists and would be overwritten, copy it to a timestamped
-   backup first: `cp target.xlsx target.xlsx.bak-$(date +%Y%m%d-%H%M%S)`. Never overwrite an
-   existing user workbook without this.
-3. Generate the file with the script.
-4. Apply formatting where it makes the sheet usable: bold frozen header row
+2. Generate the file in the temp dir with the script. XLSX: build with openpyxl. CSV: write
+   with Python's `csv` module (openpyxl cannot read or write CSV).
+3. XLSX only: apply formatting where it makes the sheet usable: bold frozen header row
    (`ws.freeze_panes = "A2"`), autofilter (`ws.auto_filter.ref = ws.dimensions`), sensible
    column widths (`ws.column_dimensions[col].width = ...`), wrap text for long cells
-   (`Alignment(wrap_text=True)`).
-5. Move/copy the finished file to the actual deliverable path.
-6. Re-open the file (fresh `openpyxl.load_workbook`, not the in-memory object from step 3)
-   and print as verification: sheet names, header row per sheet, row count per sheet, and a
-   handful of sample data rows. This is the evidence for the report — do not skip it.
+   (`Alignment(wrap_text=True)`). No formatting step for CSV.
+4. Verify the temp file with a fresh read (not the in-memory object from step 2) and print
+   it as evidence. XLSX: fresh `openpyxl.load_workbook` — sheet names, header row per sheet,
+   row count per sheet, a handful of sample data rows. CSV: fresh read with the `csv`
+   module — header, row count, a handful of sample rows. Do not skip this.
+5. Only after verification passes: if the target file already exists, copy it to a
+   timestamped backup first (`cp target.xlsx target.xlsx.bak-$(date +%Y%m%d-%H%M%S)`; never
+   overwrite an existing user file without this), then move the verified file to the
+   deliverable path. If verification fails, fix and re-verify; the existing deliverable stays
+   untouched.
 
 ## Hard rules
 
